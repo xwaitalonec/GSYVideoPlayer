@@ -23,8 +23,7 @@ public class StorageUtils {
      * @return Cache {@link File directory}
      */
     public static File getIndividualCacheDirectory(Context context) {
-        File cacheDir = getCacheDirectory(context, true);
-        return new File(cacheDir, INDIVIDUAL_DIR_NAME);
+        return getVideoCache(context);
     }
 
     /**
@@ -68,5 +67,14 @@ public class StorageUtils {
             }
         }
         return appCacheDir;
+    }
+
+    public static File getVideoCache(Context context) {
+        File cacheDir = context.getCacheDir();
+        File video = new File(cacheDir, "video");
+        if (!video.exists()) {
+            video.mkdirs();
+        }
+        return video;
     }
 }
